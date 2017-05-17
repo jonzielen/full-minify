@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const glob = require('glob');
 
 const extractSass = new ExtractTextPlugin({
   filename: "[name].css"
@@ -10,11 +11,11 @@ const extractSass = new ExtractTextPlugin({
 const config = [{
   entry: {
     main: [
-      './css/src/main.scss'
+      './src/sass/main.scss'
     ]
   },
   output: {
-    path: path.resolve(__dirname, 'css/dist'),
+    path: path.resolve(__dirname, 'public/css'),
     filename: '[name].css'
   },
   devtool: "source-map",
@@ -50,11 +51,11 @@ const config = [{
 },{
   entry: {
     main: [
-      './js/src/main.js'
+      './src/js/main.js'
     ]
   },
   output: {
-    path: path.resolve(__dirname, 'js/dist'),
+    path: path.resolve(__dirname, 'public/js'),
     filename: '[name].js'
   },
   module: {
@@ -78,13 +79,13 @@ const config = [{
   ]
 }, {
   entry: {
-    main: [
-      './index.html'
+    index: [
+      './src/html/index.html'
     ]
   },
   output: {
-    path: path.resolve(__dirname, ''),
-    filename: 'index.min.html'
+    path: path.resolve(__dirname, 'public'),
+    filename: '[name].html'
   },
   module: {
     rules: [{
@@ -103,7 +104,7 @@ const config = [{
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: "index.min.html"
+      filename: "[name].html"
     })
   ]
 }];
